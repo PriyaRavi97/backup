@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="25-09-feign-client-emp-admin"/>
+<aop-project name="25-09-Employee-DTO-mysql"/>
+<aop-project name="prjct-eureka-server"/>
+<aop-project name="25-09-login-HR"/>
+<aop-project name="discovery-server"/>
+<aop-project name="LoginHR"/>
+<aop-project name="25-09-Admin-DTO-mysql"/>
+<aop-project name="SkillsTracker"/>
+</aop-reference-model>

@@ -1,0 +1,89 @@
+package com.example.demo.bootstrap;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
+
+import com.example.demo.Entity.Employee;
+import com.example.demo.Entity.Skill;
+import com.example.demo.Entity.SubSkill;
+import com.example.demo.repo.EmployeeRepository;
+import com.example.demo.repo.SkillRepository;
+import com.example.demo.repo.SubSkillRepository;
+
+@Component
+public class DevjpaBootstrap implements ApplicationListener<ContextRefreshedEvent>{
+	@Autowired
+	private EmployeeRepository employeeRepository;
+	@Autowired
+	private SkillRepository skillRepository;
+	@Autowired
+	private SubSkillRepository subSkillRepository;
+	
+	@Override
+	public void onApplicationEvent(ContextRefreshedEvent event) {
+		// TODO Auto-generated method stub
+		init();
+	}
+	private void init() {
+				
+		//Employee 1
+		
+		
+		ArrayList<String> l3 = new ArrayList<String>(); 
+		l3.add("MicroServices");
+		l3.add("Spring");
+		SubSkill sub=new SubSkill(l3.toString());
+		subSkillRepository.save(sub);
+		
+		ArrayList<String> l5 = new ArrayList<String>(); 
+		l5.add("AI");
+		SubSkill sub3=new SubSkill(l5.toString());
+		subSkillRepository.save(sub3);
+		
+		
+		Employee e1=new Employee("000GGO","Priya","pri@gmail.com","9998881155");
+		employeeRepository.save(e1);
+		
+		Skill skills=new Skill("Java",e1,sub);
+		Skill skills2=new Skill("Python",e1,sub3);
+		skillRepository.save(skills);
+		skillRepository.save(skills2);
+		
+		Set<Skill> s2 = new HashSet<Skill>();
+		s2.add(skills);
+	
+		//Employee e1=new Employee("Priya","pri@gmail.com","9998881155",skills);
+		//Employee e1=new Employee("Priya","pri@gmail.com","9998881155",s2);
+		
+		
+		//Employee 2
+		
+		
+		ArrayList<String> l4 = new ArrayList<String>(); 
+		l4.add("IOT");
+		SubSkill sub1=new SubSkill(l4.toString());
+		subSkillRepository.save(sub1);
+		
+		Employee e2=new Employee("Geetha","geetha@gmail.com","9999999999");
+		employeeRepository.save(e2);
+	
+		Skill skills1=new Skill("Python",e2,sub1);
+		skillRepository.save(skills1);
+		
+		Set<Skill> s1 = new HashSet<Skill>();
+		s1.add(skills);
+		s1.add(skills1);
+		
+		//Employee e2=new Employee("Geetha","geetha@gmail.com","9999999999",skills1);
+		//Employee e2=new Employee("Geetha","geetha@gmail.com","9999999999",s1);
+		
+		
+		
+		
+	}
+}

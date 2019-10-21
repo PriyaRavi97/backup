@@ -1,0 +1,107 @@
+package com.example.demo.Entity;
+
+import java.util.Set;
+import java.util.UUID;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "emp")
+public class Employee {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int associateId;
+	private String uId;
+	private String associateName;
+	private String mailId;
+	private String mobileNumber;
+	
+//	@OneToOne
+//	private Skill skill;
+//	
+//	public Employee(String assocciateName, String mailId, String mobileNumber, Skill skill) {
+//		super();
+//		this.assocciateName = assocciateName;
+//		this.mailId = mailId;
+//		this.mobileNumber = mobileNumber;
+//		this.skill = skill;
+//	}
+	//@OneToMany(mappedBy = "employee" , cascade = CascadeType.ALL)
+	
+	@OneToMany(targetEntity = Skill.class,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+	private Set skill;
+	
+	public Employee(String associateName, String mailId, String mobileNumber) {
+		super();
+		this.associateName = associateName;
+		this.mailId = mailId;
+		this.mobileNumber = mobileNumber;
+		this.uId = UUID.randomUUID().toString();
+	}
+	
+	
+	
+	public int getAssociateId() {
+		return associateId;
+	}
+	
+	public void setAssociateId(int associateId) {
+		this.associateId = associateId;
+	}
+	
+	public String getAssociateName() {
+		return associateName;
+	}
+	public void setAssociateName(String associateName) {
+		this.associateName = associateName;
+	}
+	public String getMailId() {
+		return mailId;
+	}
+	
+	public void setMailId(String mailId) {
+		this.mailId = mailId;
+	}
+//	public Set<Skill> getSkills() {
+//		return skill;
+//	}
+//	public void setSkills(Set<Skill> skills) {
+//		this.skill = skills;
+//	}
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+
+
+
+	public String getuId() {
+		return uId;
+	}
+
+
+
+	public void setuId(String uId) {
+		this.uId = uId;
+	}
+		
+}
+
